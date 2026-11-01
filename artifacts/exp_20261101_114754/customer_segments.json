@@ -1,0 +1,42 @@
+[
+  {
+    "segment_name": "Persuadables",
+    "count": 3085,
+    "percentage": 61.7,
+    "avg_predicted_baseline": 0.0714,
+    "avg_predicted_treated": 0.1611,
+    "avg_estimated_uplift": 0.08968,
+    "targeting_recommendation": "TARGET PRIORITY",
+    "action_description": "Allocate marketing budget here. These customers show strong positive incremental response."
+  },
+  {
+    "segment_name": "Sure Things",
+    "count": 25,
+    "percentage": 0.5,
+    "avg_predicted_baseline": 0.2801,
+    "avg_predicted_treated": 0.2857,
+    "avg_estimated_uplift": 0.00551,
+    "targeting_recommendation": "DO NOT TARGET (Organic)",
+    "action_description": "Suppression list. High organic purchase probability; sending discounts erodes profit margins."
+  },
+  {
+    "segment_name": "Lost Causes",
+    "count": 1226,
+    "percentage": 24.52,
+    "avg_predicted_baseline": 0.05,
+    "avg_predicted_treated": 0.0569,
+    "avg_estimated_uplift": 0.00689,
+    "targeting_recommendation": "DO NOT TARGET (Unresponsive)",
+    "action_description": "Low response in both conditions. Save promotional budget; consider alternative channels."
+  },
+  {
+    "segment_name": "Sleeping Dogs",
+    "count": 664,
+    "percentage": 13.28,
+    "avg_predicted_baseline": 0.1478,
+    "avg_predicted_treated": 0.0964,
+    "avg_estimated_uplift": -0.05146,
+    "targeting_recommendation": "STRICTLY EXCLUDE",
+    "action_description": "High churn/unsubscription risk when contacted. Exclude from all campaign touchpoints."
+  }
+]

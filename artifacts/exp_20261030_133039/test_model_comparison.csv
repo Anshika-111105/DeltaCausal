@@ -1,0 +1,4 @@
+model,qini_score,auuc,uplift_top_10pct,uplift_top_20pct,incremental_per_1000,policy_net_value_top_20pct,pehe,cate_pearson_corr,cate_spearman_corr
+t_learner,72.783,78.1191,0.17302,0.12006,120.06,3502.78,0.06657,0.631,0.5648
+response_propensity,70.4365,65.4522,0.24686,0.13096,130.96,4047.93,0.09569,0.8934,0.8609
+random,-3.0654,-8.337,-0.01677,0.02776,27.76,-1112.17,0.54057,-0.0107,-0.0079

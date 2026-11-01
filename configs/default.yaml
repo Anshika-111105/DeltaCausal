@@ -1,0 +1,108 @@
+experiment:
+  name: "ecommerce_promotional_uplift"
+  version: "1.0.0"
+  random_seed: 42
+  tracking_dir: "artifacts"
+
+data:
+  dataset_type: "synthetic"  # "synthetic" or "criteo"
+  raw_path: "data/raw/criteo_sample.csv"
+  synthetic_path: "data/synthetic/synthetic_uplift.csv"
+  processed_dir: "data/processed"
+  sample_size: 50000
+  chunk_size: 100000
+  download_url: "http://go.criteo.net/criteo-research-uplift-v2.1.csv.gz"
+
+splitting:
+  train_ratio: 0.60
+  val_ratio: 0.20
+  test_ratio: 0.20
+  stratify_by: "treatment_outcome"
+  random_state: 42
+
+features:
+  feature_cols:
+    - "f0"
+    - "f1"
+    - "f2"
+    - "f3"
+    - "f4"
+    - "f5"
+    - "f6"
+    - "f7"
+    - "f8"
+    - "f9"
+    - "f10"
+    - "f11"
+  treatment_col: "treatment"
+  outcome_col: "conversion"
+  secondary_outcome_col: "visit"
+  imputation_strategy: "median"
+  scaling_strategy: "standard"
+
+models:
+  propensity:
+    estimator: "LogisticRegression"
+    params:
+      max_iter: 1000
+      C: 1.0
+      random_state: 42
+
+  outcome_baseline:
+    estimator: "XGBClassifier"
+    params:
+      n_estimators: 100
+      max_depth: 4
+      learning_rate: 0.05
+      eval_metric: "logloss"
+      random_state: 42
+
+  uplift_learners:
+    - "two_model"
+    - "s_learner"
+    - "t_learner"
+    - "x_learner"
+    - "doubly_robust"
+
+  base_classifier:
+    estimator: "XGBClassifier"
+    params:
+      n_estimators: 100
+      max_depth: 4
+      learning_rate: 0.05
+      eval_metric: "logloss"
+      random_state: 42
+
+  base_regressor:
+    estimator: "XGBRegressor"
+    params:
+      n_estimators: 100
+      max_depth: 4
+      learning_rate: 0.05
+      random_state: 42
+
+evaluation:
+  primary_metric: "qini_coefficient"
+  metrics:
+    - "qini_coefficient"
+    - "auuc"
+    - "uplift_top_10_percent"
+    - "uplift_top_20_percent"
+    - "incremental_conversions_per_1000"
+    - "policy_net_value"
+    - "pehe"  # For synthetic evaluation where true CATE is known
+  n_bootstraps: 100
+  confidence_level: 0.95
+
+policy:
+  default_budget: 10000.0
+  cost_per_intervention: 2.50
+  margin_per_conversion: 50.0
+  max_customers: 20000
+  targeting_fractions: [0.05, 0.10, 0.20, 0.30, 0.40, 0.50, 0.75, 1.0]
+
+assistant:
+  embedding_model: "all-MiniLM-L6-v2"
+  top_k_documents: 4
+  similarity_threshold: 0.35
+

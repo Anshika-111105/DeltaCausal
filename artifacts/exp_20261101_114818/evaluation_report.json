@@ -1,0 +1,102 @@
+{
+  "experiment_id": "exp_20261101_114818",
+  "evaluated_split": "validation",
+  "model_metrics": {
+    "random": {
+      "qini_score": -1.49,
+      "auuc": 10.0392,
+      "uplift_top_10pct": 0.01472,
+      "uplift_top_20pct": 0.04074,
+      "incremental_per_1000": 40.74,
+      "policy_net_value_top_20pct": -370.53
+    },
+    "zero_intervention": {
+      "qini_score": -7.657,
+      "auuc": -4.5641,
+      "uplift_top_10pct": 0.04202,
+      "uplift_top_20pct": 0.0563,
+      "incremental_per_1000": 56.3,
+      "policy_net_value_top_20pct": 251.85
+    },
+    "overall_ate": {
+      "qini_score": -7.657,
+      "auuc": -4.5641,
+      "uplift_top_10pct": 0.04202,
+      "uplift_top_20pct": 0.0563,
+      "incremental_per_1000": 56.3,
+      "policy_net_value_top_20pct": 251.85
+    },
+    "response_propensity": {
+      "qini_score": 41.5021,
+      "auuc": 58.0634,
+      "uplift_top_10pct": 0.20715,
+      "uplift_top_20pct": 0.16295,
+      "incremental_per_1000": 162.95,
+      "policy_net_value_top_20pct": 4517.86
+    },
+    "two_model_naive": {
+      "qini_score": 40.6378,
+      "auuc": 58.1577,
+      "uplift_top_10pct": 0.22339,
+      "uplift_top_20pct": 0.17955,
+      "incremental_per_1000": 179.55,
+      "policy_net_value_top_20pct": 5181.95
+    },
+    "s_learner": {
+      "qini_score": 39.6205,
+      "auuc": 58.5192,
+      "uplift_top_10pct": 0.20224,
+      "uplift_top_20pct": 0.16172,
+      "incremental_per_1000": 161.72,
+      "policy_net_value_top_20pct": 4468.76
+    },
+    "t_learner": {
+      "qini_score": 31.542,
+      "auuc": 51.5528,
+      "uplift_top_10pct": 0.14509,
+      "uplift_top_20pct": 0.16017,
+      "incremental_per_1000": 160.17,
+      "policy_net_value_top_20pct": 4406.8
+    },
+    "x_learner": {
+      "qini_score": 32.8253,
+      "auuc": 46.8088,
+      "uplift_top_10pct": 0.16257,
+      "uplift_top_20pct": 0.13554,
+      "incremental_per_1000": 135.54,
+      "policy_net_value_top_20pct": 3421.69
+    },
+    "doubly_robust": {
+      "qini_score": 37.5557,
+      "auuc": 52.046,
+      "uplift_top_10pct": 0.24406,
+      "uplift_top_20pct": 0.15097,
+      "incremental_per_1000": 150.97,
+      "policy_net_value_top_20pct": 4038.83
+    }
+  },
+  "best_model_name": "two_model_naive",
+  "primary_metric": "qini_score",
+  "bootstrap_intervals": {
+    "two_model_naive": {
+      "qini_score_ci": [
+        10.5064,
+        69.979
+      ],
+      "auuc_ci": [
+        32.5923,
+        89.4306
+      ]
+    },
+    "response_propensity": {
+      "qini_score_ci": [
+        17.9077,
+        73.5815
+      ],
+      "auuc_ci": [
+        32.4897,
+        93.3074
+      ]
+    }
+  }
+}

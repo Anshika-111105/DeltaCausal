@@ -1,0 +1,17 @@
+{
+  "train": {
+    "n_samples": 12000,
+    "treatment_ratio": 0.8498,
+    "outcome_rate": 0.126
+  },
+  "val": {
+    "n_samples": 4000,
+    "treatment_ratio": 0.8498,
+    "outcome_rate": 0.1263
+  },
+  "test": {
+    "n_samples": 4000,
+    "treatment_ratio": 0.8498,
+    "outcome_rate": 0.1263
+  }
+}

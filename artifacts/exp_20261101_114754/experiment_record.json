@@ -1,0 +1,36 @@
+{
+  "experiment_id": "exp_20261101_114754",
+  "created_at_utc": "2026-11-01T11:47:57.558497",
+  "random_seed": 42,
+  "models_trained": [
+    "random",
+    "zero_intervention",
+    "overall_ate",
+    "response_propensity",
+    "two_model_naive",
+    "s_learner",
+    "t_learner",
+    "x_learner",
+    "doubly_robust",
+    "propensity"
+  ],
+  "n_train_samples": 15000,
+  "n_features": 12,
+  "feature_names": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9",
+    "f10",
+    "f11"
+  ],
+  "treatment_column": "treatment",
+  "outcome_column": "conversion",
+  "model_artifacts_dir": "artifacts\\exp_20261101_114754"
+}

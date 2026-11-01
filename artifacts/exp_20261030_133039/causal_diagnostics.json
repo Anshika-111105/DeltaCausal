@@ -1,0 +1,157 @@
+{
+  "covariate_balance": [
+    {
+      "feature": "f0",
+      "mean_treated": 0.0058,
+      "mean_control": -0.0206,
+      "std_treated": 0.9895,
+      "std_control": 1.0245,
+      "smd": 0.0262,
+      "ks_statistic": 0.0195,
+      "ks_p_value": 0.174217,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f1",
+      "mean_treated": 0.0011,
+      "mean_control": 0.0201,
+      "std_treated": 1.0094,
+      "std_control": 0.9851,
+      "smd": -0.019,
+      "ks_statistic": 0.0162,
+      "ks_p_value": 0.370955,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f2",
+      "mean_treated": 0.0011,
+      "mean_control": 0.0198,
+      "std_treated": 1.006,
+      "std_control": 1.0172,
+      "smd": -0.0185,
+      "ks_statistic": 0.0149,
+      "ks_p_value": 0.473312,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f3",
+      "mean_treated": 0.0031,
+      "mean_control": 0.006,
+      "std_treated": 1.0024,
+      "std_control": 0.9928,
+      "smd": -0.0029,
+      "ks_statistic": 0.0105,
+      "ks_p_value": 0.871893,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f4",
+      "mean_treated": -0.0139,
+      "mean_control": -0.0092,
+      "std_treated": 0.9938,
+      "std_control": 1.0011,
+      "smd": -0.0047,
+      "ks_statistic": 0.0091,
+      "ks_p_value": 0.952488,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f5",
+      "mean_treated": 0.0039,
+      "mean_control": 0.0135,
+      "std_treated": 0.9967,
+      "std_control": 0.9875,
+      "smd": -0.0097,
+      "ks_statistic": 0.0127,
+      "ks_p_value": 0.676276,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f6",
+      "mean_treated": 0.0125,
+      "mean_control": 0.0026,
+      "std_treated": 0.9951,
+      "std_control": 0.9956,
+      "smd": 0.01,
+      "ks_statistic": 0.0121,
+      "ks_p_value": 0.736185,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f7",
+      "mean_treated": 0.0117,
+      "mean_control": -0.0036,
+      "std_treated": 1.008,
+      "std_control": 1.0103,
+      "smd": 0.0151,
+      "ks_statistic": 0.0154,
+      "ks_p_value": 0.431748,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f8",
+      "mean_treated": -0.0056,
+      "mean_control": 0.0139,
+      "std_treated": 1.0017,
+      "std_control": 0.9931,
+      "smd": -0.0195,
+      "ks_statistic": 0.0156,
+      "ks_p_value": 0.413474,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f9",
+      "mean_treated": -0.0116,
+      "mean_control": -0.0156,
+      "std_treated": 0.9971,
+      "std_control": 0.9985,
+      "smd": 0.004,
+      "ks_statistic": 0.0082,
+      "ks_p_value": 0.980839,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f10",
+      "mean_treated": 0.0044,
+      "mean_control": 0.002,
+      "std_treated": 1.0043,
+      "std_control": 1.0098,
+      "smd": 0.0023,
+      "ks_statistic": 0.0158,
+      "ks_p_value": 0.401944,
+      "is_imbalanced": false
+    },
+    {
+      "feature": "f11",
+      "mean_treated": -0.0005,
+      "mean_control": 0.0003,
+      "std_treated": 0.9998,
+      "std_control": 1.0172,
+      "smd": -0.0008,
+      "ks_statistic": 0.0169,
+      "ks_p_value": 0.322205,
+      "is_imbalanced": false
+    }
+  ],
+  "srm_test": {
+    "observed_treated": 21253,
+    "observed_control": 3747,
+    "expected_ratio": 0.85,
+    "chi2_statistic": 0.0028,
+    "p_value": 0.957623,
+    "is_srm_detected": false,
+    "interpretation": "No Sample Ratio Mismatch detected (p=0.9576). Observed allocation (21,253 treated, 3,747 control) conforms to planned design."
+  },
+  "propensity_overlap": {
+    "treated_min": 0.8253,
+    "treated_max": 0.8748,
+    "control_min": 0.8292,
+    "control_max": 0.8732,
+    "common_support_min": 0.8292,
+    "common_support_max": 0.8732,
+    "violations_count": 0,
+    "violations_pct": 0.0,
+    "is_overlap_adequate": true,
+    "summary": "Common support bounds: [0.829, 0.873]. Extreme positivity violations: 0 (0.00%). Overlap is adequate for causal adjustment."
+  }
+}

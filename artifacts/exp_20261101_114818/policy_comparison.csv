@@ -1,0 +1,5 @@
+policy_name,budget_allocated,budget_spent,customers_targeted,targeting_rate,expected_incremental_conversions,expected_incremental_revenue,expected_incremental_profit,roi_percentage,avg_net_value_per_targeted,all_candidates_negative_value
+Status Quo (No Campaign),0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,True
+Random Targeting,10000.0,10000.0,4000,1.0,201.45,10072.3,72.3,0.72,0.0181,False
+Response Propensity Targeting,10000.0,10000.0,4000,1.0,201.45,10072.3,72.3,0.72,0.0181,False
+Counterfactual Uplift Targeting,10000.0,3395.0,1358,0.3395,169.35,8467.55,5072.55,149.41,3.7353,False

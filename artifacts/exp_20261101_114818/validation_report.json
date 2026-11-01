@@ -1,0 +1,20 @@
+{
+  "is_valid": true,
+  "dataset_type": "criteo",
+  "total_rows": 20000,
+  "total_columns": 16,
+  "missing_value_summary": {},
+  "duplicate_count": 0,
+  "treatment_distribution": {
+    "1": 16996,
+    "0": 3004
+  },
+  "outcome_distribution": {
+    "0": 17478,
+    "1": 2522
+  },
+  "outcome_rate_treated": 0.1335,
+  "outcome_rate_control": 0.08422,
+  "issues": [],
+  "execution_time_utc": "2026-11-01T11:48:18.674197+00:00"
+}

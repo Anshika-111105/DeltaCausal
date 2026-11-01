@@ -1,0 +1,20 @@
+{
+  "is_valid": true,
+  "dataset_type": "synthetic",
+  "total_rows": 25000,
+  "total_columns": 27,
+  "missing_value_summary": {},
+  "duplicate_count": 0,
+  "treatment_distribution": {
+    "1": 21253,
+    "0": 3747
+  },
+  "outcome_distribution": {
+    "0": 21975,
+    "1": 3025
+  },
+  "outcome_rate_treated": 0.12775,
+  "outcome_rate_control": 0.08273,
+  "issues": [],
+  "execution_time_utc": "2026-11-01T11:47:55.424109+00:00"
+}

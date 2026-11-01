@@ -1,0 +1,54 @@
+[
+  {
+    "policy_name": "Status Quo (No Campaign)",
+    "budget_allocated": 0.0,
+    "budget_spent": 0.0,
+    "customers_targeted": 0,
+    "targeting_rate": 0.0,
+    "expected_incremental_conversions": 0.0,
+    "expected_incremental_revenue": 0.0,
+    "expected_incremental_profit": 0.0,
+    "roi_percentage": 0.0,
+    "avg_net_value_per_targeted": 0.0,
+    "all_candidates_negative_value": true
+  },
+  {
+    "policy_name": "Random Targeting",
+    "budget_allocated": 10000.0,
+    "budget_spent": 10000.0,
+    "customers_targeted": 4000,
+    "targeting_rate": 1.0,
+    "expected_incremental_conversions": 201.45,
+    "expected_incremental_revenue": 10072.3,
+    "expected_incremental_profit": 72.3,
+    "roi_percentage": 0.72,
+    "avg_net_value_per_targeted": 0.0181,
+    "all_candidates_negative_value": false
+  },
+  {
+    "policy_name": "Response Propensity Targeting",
+    "budget_allocated": 10000.0,
+    "budget_spent": 10000.0,
+    "customers_targeted": 4000,
+    "targeting_rate": 1.0,
+    "expected_incremental_conversions": 201.45,
+    "expected_incremental_revenue": 10072.3,
+    "expected_incremental_profit": 72.3,
+    "roi_percentage": 0.72,
+    "avg_net_value_per_targeted": 0.0181,
+    "all_candidates_negative_value": false
+  },
+  {
+    "policy_name": "Counterfactual Uplift Targeting",
+    "budget_allocated": 10000.0,
+    "budget_spent": 3395.0,
+    "customers_targeted": 1358,
+    "targeting_rate": 0.3395,
+    "expected_incremental_conversions": 169.35,
+    "expected_incremental_revenue": 8467.55,
+    "expected_incremental_profit": 5072.55,
+    "roi_percentage": 149.41,
+    "avg_net_value_per_targeted": 3.7353,
+    "all_candidates_negative_value": false
+  }
+]

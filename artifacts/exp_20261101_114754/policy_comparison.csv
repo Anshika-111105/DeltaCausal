@@ -1,0 +1,6 @@
+policy_name,budget_allocated,budget_spent,customers_targeted,targeting_rate,expected_incremental_conversions,expected_incremental_revenue,expected_incremental_profit,roi_percentage,avg_net_value_per_targeted,all_candidates_negative_value
+Status Quo (No Campaign),0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,True
+Random Targeting,10000.0,10000.0,4000,0.8,200.86,10043.25,43.25,0.43,0.0108,False
+Response Propensity Targeting,10000.0,10000.0,4000,0.8,246.77,12338.71,2338.71,23.39,0.5847,False
+Counterfactual Uplift Targeting,10000.0,4770.0,1908,0.3816,237.25,11862.48,7092.48,148.69,3.7172,False
+Oracle Ground-Truth Policy,10000.0,3582.5,1433,0.2866,175.84,8791.97,5209.47,145.41,3.6354,False
