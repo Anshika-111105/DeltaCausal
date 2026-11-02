@@ -60,3 +60,26 @@ def test_customer_segmenter_categorization():
     assert list(labels) == ["Persuadables", "Sleeping Dogs", "Sure Things", "Lost Causes"]
     assert len(summaries) == 4
 
+
+def test_optimizer_handles_series_lists_and_empty_inputs():
+    import pandas as pd
+    opt = PolicyOptimizer(default_cost=2.50, default_margin=50.0)
+
+    # 1. Test with pandas Series having non-default custom index
+    series_input = pd.Series([0.15, 0.08, -0.05], index=[100, 200, 300])
+    mask, res = opt.optimize_policy(series_input, budget=100.0)
+    assert len(mask) == 3
+    assert res.customers_targeted == 2  # Only the 2 positive ones
+
+    # 2. Test with python list
+    list_input = [0.20, 0.10, -0.02]
+    mask_list, res_list = opt.optimize_policy(list_input, budget=50.0)
+    assert len(mask_list) == 3
+    assert res_list.customers_targeted == 2
+
+    # 3. Test with empty array (edge case N=0)
+    empty_mask, empty_res = opt.optimize_policy(np.array([]), budget=100.0)
+    assert len(empty_mask) == 0
+    assert empty_res.customers_targeted == 0
+    assert empty_res.budget_spent == 0.0
+

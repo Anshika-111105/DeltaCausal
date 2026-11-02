@@ -65,44 +65,54 @@ class PolicyOptimizer:
 
     def optimize_policy(
         self,
-        uplift_scores: np.ndarray,
+        uplift_scores: Union[np.ndarray, List[float], pd.Series],
         budget: float = 10000.0,
-        cost_per_intervention: Optional[Union[float, np.ndarray]] = None,
-        margin_per_conversion: Optional[Union[float, np.ndarray]] = None,
+        cost_per_intervention: Optional[Union[float, np.ndarray, List[float], pd.Series]] = None,
+        margin_per_conversion: Optional[Union[float, np.ndarray, List[float], pd.Series]] = None,
         max_interventions: Optional[int] = None,
         only_positive_value: bool = True,
         policy_name: str = "Uplift Targeting",
     ) -> Tuple[np.ndarray, PolicySimulationResult]:
-        """Solve knapsack / greedy ranking targeting optimization.
+        """Solve knapsack / greedy ranking targeting optimization."""
+        uplift_arr = np.asarray(uplift_scores, dtype=float).ravel()
+        n = len(uplift_arr)
 
-        Parameters
-        ----------
-        uplift_scores : np.ndarray
-            Predicted treatment effects tau(x).
-        budget : float
-            Total allowable campaign expenditure.
-        cost_per_intervention : float or np.ndarray
-            Cost of intervention per customer.
-        margin_per_conversion : float or np.ndarray
-            Gross margin per incremental conversion.
-        max_interventions : Optional[int]
-            Cap on total number of outreach actions.
-        only_positive_value : bool
-            If True, only target customers where Expected Net Value > 0.
-        policy_name : str
-            Name of policy for reporting.
+        if n == 0:
+            empty_res = PolicySimulationResult(
+                policy_name=policy_name,
+                budget_allocated=float(budget),
+                budget_spent=0.0,
+                customers_targeted=0,
+                targeting_rate=0.0,
+                expected_incremental_conversions=0.0,
+                expected_incremental_revenue=0.0,
+                expected_incremental_profit=0.0,
+                roi_percentage=0.0,
+                avg_net_value_per_targeted=0.0,
+                all_candidates_negative_value=True,
+            )
+            return np.zeros(0, dtype=int), empty_res
 
-        Returns
-        -------
-        Tuple[np.ndarray, PolicySimulationResult]
-            Binary selection array (1=targeted, 0=suppressed), and financial simulation result.
-        """
-        n = len(uplift_scores)
-        costs = np.full(n, cost_per_intervention if cost_per_intervention is not None else self.default_cost, dtype=float)
-        margins = np.full(n, margin_per_conversion if margin_per_conversion is not None else self.default_margin, dtype=float)
+        if isinstance(cost_per_intervention, (np.ndarray, list, pd.Series)):
+            costs = np.asarray(cost_per_intervention, dtype=float).ravel()
+            if len(costs) != n:
+                raise ValueError(f"cost_per_intervention length ({len(costs)}) must match uplift_scores ({n})")
+        elif cost_per_intervention is not None:
+            costs = np.full(n, float(cost_per_intervention), dtype=float)
+        else:
+            costs = np.full(n, float(self.default_cost), dtype=float)
+
+        if isinstance(margin_per_conversion, (np.ndarray, list, pd.Series)):
+            margins = np.asarray(margin_per_conversion, dtype=float).ravel()
+            if len(margins) != n:
+                raise ValueError(f"margin_per_conversion length ({len(margins)}) must match uplift_scores ({n})")
+        elif margin_per_conversion is not None:
+            margins = np.full(n, float(margin_per_conversion), dtype=float)
+        else:
+            margins = np.full(n, float(self.default_margin), dtype=float)
 
         # Apply conservatism discount if requested
-        discounted_uplift = uplift_scores * self.uncertainty_discount
+        discounted_uplift = uplift_arr * self.uncertainty_discount
 
         # Expected Incremental Net Value: V_i = tau_i * margin_i - cost_i
         net_values = discounted_uplift * margins - costs
@@ -153,7 +163,7 @@ class PolicyOptimizer:
             budget_allocated=float(budget),
             budget_spent=round(float(spent), 2),
             customers_targeted=targeted_count,
-            targeting_rate=round(float(targeted_count / n), 4),
+            targeting_rate=round(float(targeted_count / max(1, n)), 4),
             expected_incremental_conversions=round(exp_conversions, 2),
             expected_incremental_revenue=round(exp_revenue, 2),
             expected_incremental_profit=round(exp_profit, 2),
@@ -166,20 +176,24 @@ class PolicyOptimizer:
 
     def compare_targeting_policies(
         self,
-        uplift_scores: np.ndarray,
-        response_propensity_scores: np.ndarray,
-        true_cate: Optional[np.ndarray] = None,
+        uplift_scores: Union[np.ndarray, List[float], pd.Series],
+        response_propensity_scores: Union[np.ndarray, List[float], pd.Series],
+        true_cate: Optional[Union[np.ndarray, List[float], pd.Series]] = None,
         budget: float = 10000.0,
         cost_per_intervention: float = 2.50,
         margin_per_conversion: float = 50.0,
         random_seed: int = 42,
     ) -> pd.DataFrame:
         """Compare all canonical policies under the exact same marketing budget."""
+        uplift_arr = np.asarray(uplift_scores, dtype=float).ravel()
+        prop_arr = np.asarray(response_propensity_scores, dtype=float).ravel()
+        true_arr = np.asarray(true_cate, dtype=float).ravel() if true_cate is not None else None
+
         results = []
 
         # 1. No Campaign (Status Quo)
         _, res_none = self.optimize_policy(
-            uplift_scores=np.zeros(len(uplift_scores)),
+            uplift_scores=np.zeros(len(uplift_arr)),
             budget=0.0,
             cost_per_intervention=cost_per_intervention,
             margin_per_conversion=margin_per_conversion,
@@ -189,7 +203,7 @@ class PolicyOptimizer:
 
         # 2. Random Targeting
         rng = np.random.default_rng(random_seed)
-        random_scores = rng.uniform(0.0, 1.0, size=len(uplift_scores))
+        random_scores = rng.uniform(0.0, 1.0, size=len(uplift_arr))
         # Estimate expected conversions under random allocation = sample_rate * average ATE
         _, res_rand = self.optimize_policy(
             uplift_scores=random_scores,
@@ -200,7 +214,7 @@ class PolicyOptimizer:
             policy_name="Random Targeting",
         )
         # Recalculate true expected conversion under random using overall mean uplift
-        mean_uplift = float(np.mean(uplift_scores))
+        mean_uplift = float(np.mean(uplift_arr)) if len(uplift_arr) > 0 else 0.0
         rand_targeted = res_rand.customers_targeted
         rand_spent = rand_targeted * cost_per_intervention
         rand_conv = rand_targeted * mean_uplift
@@ -218,7 +232,7 @@ class PolicyOptimizer:
         # 3. Response Propensity Targeting (Conventional Marketing)
         # Propensity models rank by high conversion, not incremental lift
         _, res_prop = self.optimize_policy(
-            uplift_scores=response_propensity_scores,
+            uplift_scores=prop_arr,
             budget=budget,
             cost_per_intervention=cost_per_intervention,
             margin_per_conversion=margin_per_conversion,
@@ -226,8 +240,8 @@ class PolicyOptimizer:
             policy_name="Response Propensity Targeting",
         )
         # Evaluate incremental impact of the propensity-targeted cohort using their actual uplift
-        order_prop = np.argsort(-response_propensity_scores)[:res_prop.customers_targeted]
-        prop_conv = float(np.sum(uplift_scores[order_prop]))
+        order_prop = np.argsort(-prop_arr)[:res_prop.customers_targeted]
+        prop_conv = float(np.sum(uplift_arr[order_prop])) if len(order_prop) > 0 else 0.0
         prop_rev = prop_conv * margin_per_conversion
         prop_spent = len(order_prop) * cost_per_intervention
         prop_prof = prop_rev - prop_spent
@@ -242,7 +256,7 @@ class PolicyOptimizer:
 
         # 4. Uplift Targeting (Our Engine)
         _, res_uplift = self.optimize_policy(
-            uplift_scores=uplift_scores,
+            uplift_scores=uplift_arr,
             budget=budget,
             cost_per_intervention=cost_per_intervention,
             margin_per_conversion=margin_per_conversion,
@@ -251,9 +265,9 @@ class PolicyOptimizer:
         results.append(asdict(res_uplift))
 
         # 5. Oracle Targeting (if synthetic ground truth is provided)
-        if true_cate is not None:
+        if true_arr is not None:
             _, res_oracle = self.optimize_policy(
-                uplift_scores=true_cate,
+                uplift_scores=true_arr,
                 budget=budget,
                 cost_per_intervention=cost_per_intervention,
                 margin_per_conversion=margin_per_conversion,
@@ -266,12 +280,13 @@ class PolicyOptimizer:
 
     def run_sensitivity_grid(
         self,
-        uplift_scores: np.ndarray,
+        uplift_scores: Union[np.ndarray, List[float], pd.Series],
         base_budget: float = 10000.0,
         base_cost: float = 2.50,
         base_margin: float = 50.0,
     ) -> pd.DataFrame:
         """Run multidimensional sensitivity analysis across budget, cost, margin, and uncertainty discount."""
+        uplift_arr = np.asarray(uplift_scores, dtype=float).ravel()
         budget_multipliers = [0.5, 0.75, 1.0, 1.25, 1.5]
         cost_multipliers = [0.8, 1.0, 1.2]
         margin_multipliers = [0.8, 1.0, 1.2]
