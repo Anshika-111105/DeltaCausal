@@ -1,0 +1,67 @@
+[
+  {
+    "policy_name": "Status Quo (No Campaign)",
+    "budget_allocated": 0.0,
+    "budget_spent": 0.0,
+    "customers_targeted": 0,
+    "targeting_rate": 0.0,
+    "expected_incremental_conversions": 0.0,
+    "expected_incremental_revenue": 0.0,
+    "expected_incremental_profit": 0.0,
+    "roi_percentage": 0.0,
+    "avg_net_value_per_targeted": 0.0,
+    "all_candidates_negative_value": true
+  },
+  {
+    "policy_name": "Random Targeting",
+    "budget_allocated": 10000.0,
+    "budget_spent": 10000.0,
+    "customers_targeted": 4000,
+    "targeting_rate": 0.4,
+    "expected_incremental_conversions": 140.62,
+    "expected_incremental_revenue": 7031.06,
+    "expected_incremental_profit": -2968.94,
+    "roi_percentage": -29.69,
+    "avg_net_value_per_targeted": -0.7422,
+    "all_candidates_negative_value": false
+  },
+  {
+    "policy_name": "Response Propensity Targeting",
+    "budget_allocated": 10000.0,
+    "budget_spent": 10000.0,
+    "customers_targeted": 4000,
+    "targeting_rate": 0.4,
+    "expected_incremental_conversions": 284.87,
+    "expected_incremental_revenue": 14243.45,
+    "expected_incremental_profit": 4243.45,
+    "roi_percentage": 42.43,
+    "avg_net_value_per_targeted": 1.0609,
+    "all_candidates_negative_value": false
+  },
+  {
+    "policy_name": "Counterfactual Uplift Targeting",
+    "budget_allocated": 10000.0,
+    "budget_spent": 5407.5,
+    "customers_targeted": 2163,
+    "targeting_rate": 0.2163,
+    "expected_incremental_conversions": 236.54,
+    "expected_incremental_revenue": 11826.86,
+    "expected_incremental_profit": 6419.36,
+    "roi_percentage": 118.71,
+    "avg_net_value_per_targeted": 2.9678,
+    "all_candidates_negative_value": false
+  },
+  {
+    "policy_name": "Oracle Ground-Truth Policy",
+    "budget_allocated": 10000.0,
+    "budget_spent": 6942.5,
+    "customers_targeted": 2777,
+    "targeting_rate": 0.2777,
+    "expected_incremental_conversions": 347.91,
+    "expected_incremental_revenue": 17395.27,
+    "expected_incremental_profit": 10452.77,
+    "roi_percentage": 150.56,
+    "avg_net_value_per_targeted": 3.7641,
+    "all_candidates_negative_value": false
+  }
+]

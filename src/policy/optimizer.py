@@ -144,11 +144,12 @@ class PolicyOptimizer:
 
         # Compute aggregate financial metrics for the policy
         if targeted_count > 0:
-            exp_conversions = float(np.sum(discounted_uplift[selected_mask]))
-            exp_revenue = float(np.sum(discounted_uplift[selected_mask] * margins[selected_mask]))
+            # Use point-estimate uplift for true expected business impact
+            exp_conversions = float(np.sum(uplift_arr[selected_mask]))
+            exp_revenue = float(np.sum(uplift_arr[selected_mask] * margins[selected_mask]))
             exp_profit = float(exp_revenue - spent)
-            roi = float((exp_profit / max(1.0, spent)) * 100.0)
-            avg_net_val = float(exp_profit / targeted_count)
+            roi = float((exp_profit / spent) * 100.0) if spent > 0.0 else 0.0
+            avg_net_val = float(exp_profit / max(1, targeted_count))
         else:
             exp_conversions = 0.0
             exp_revenue = 0.0
@@ -156,7 +157,7 @@ class PolicyOptimizer:
             roi = 0.0
             avg_net_val = 0.0
 
-        all_neg = bool(np.all(net_values <= 0.0))
+        all_neg = bool(np.all(net_values <= 0.0)) if n > 0 else True
 
         sim_result = PolicySimulationResult(
             policy_name=policy_name,
