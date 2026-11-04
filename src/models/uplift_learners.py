@@ -1,6 +1,4 @@
-"""Uplift Meta-Learners for Counterfactual Treatment Effect Estimation.
-
-Implements rigorous, production-grade causal meta-learners:
+"""
 1. BaseUpliftLearner: Unified interface for all causal learners.
 2. SLearner: Single-model estimator with treatment feature and counterfactual scoring.
 3. TLearner: Separate outcome models for treated and control groups.
