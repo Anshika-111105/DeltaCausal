@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,6 +7,13 @@ from .routes import causal, health
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("deltacausal_api")
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("DeltaCausal Uplift Engine API successfully initialized and ready for inference.")
+    yield
+
 
 app = FastAPI(
     title="DeltaCausal: Counterfactual Business Decision & Uplift Engine API",
@@ -16,6 +24,7 @@ app = FastAPI(
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 # CORS Configuration
@@ -27,14 +36,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include Routers
+# Routers
 app.include_router(health.router)
 app.include_router(causal.router)
-
-
-@app.on_event("startup")
-async def startup_event():
-    logger.info("Counterfactual Uplift Engine API successfully initialized and ready for inference.")
 
 
 if __name__ == "__main__":
