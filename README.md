@@ -3,8 +3,9 @@
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.135-009688.svg)](https://fastapi.tiangolo.com/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.58-FF4B4B.svg)](https://streamlit.io/)
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Tests](https://img.shields.io/badge/tests-25%20passed-brightgreen.svg)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/tests-26%20passed-brightgreen.svg)]()
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 **DeltaCausal** is a production-oriented causal inference and machine learning platform engineered to estimate the **incremental treatment impact** of marketing interventions, promotional discounts, and customer engagement policies under finite campaign budget constraints.
 
@@ -100,8 +101,8 @@ Low Lift tau(x)                   │                                   Uplift t
 ### Environment Setup
 ```bash
 # Clone repository
-git clone https://github.com/your-org/counterfactual-uplift-engine.git
-cd counterfactual-uplift-engine
+git clone https://github.com/Anshika-111105/DeltaCausal.git
+cd DeltaCausal
 
 # Install dependencies
 pip install -r requirements.txt
@@ -112,7 +113,7 @@ pip install -r requirements.txt
 python scripts/run_smoke_test.py
 ```
 
-### Run Full Automated Test Suite (25 Tests)
+### Run Full Automated Test Suite (26 Tests)
 ```bash
 pytest -v
 ```
