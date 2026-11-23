@@ -1,11 +1,3 @@
-"""
-1. BaseUpliftLearner: Unified interface for all causal learners.
-2. SLearner: Single-model estimator with treatment feature and counterfactual scoring.
-3. TLearner: Separate outcome models for treated and control groups.
-4. XLearner: Künzel et al. (2019) multi-stage crossover learner with propensity weighting.
-5. DoublyRobustLearner: AIPW pseudo-outcome regression with double robustness.
-"""
-
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional, Tuple, Union
 import numpy as np
