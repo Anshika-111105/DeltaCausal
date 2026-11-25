@@ -1,19 +1,3 @@
-"""Budget-Constrained Policy Optimization and Campaign Financial Simulator.
-
-Simulates and solves for optimal customer targeting policies under budget constraints,
-comparing counterfactual uplift targeting against conventional response propensity and random allocation.
-
-Formulation:
-    Expected Incremental Net Value per customer i:
-        V_i = tau_hat(x_i) * margin_i - cost_i
-    Maximize:
-        Sum_{i in S} V_i
-    Subject to:
-        Sum_{i in S} cost_i <= Budget
-        |S| <= Max_Interventions
-        V_i > 0 (Rationality constraint: never target expected loss-making candidates)
-"""
-
 from dataclasses import asdict, dataclass
 import logging
 from typing import Any, Dict, List, Optional, Tuple, Union

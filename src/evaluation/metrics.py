@@ -1,13 +1,3 @@
-"""Uplift Evaluation Metrics: Qini, AUUC, Top-Decile Uplift, and Ground-Truth CATE Error.
-
-Implements rigorous, mathematically verified evaluation routines for causal targeting:
-1. Cumulative Uplift Curve and Area Under Uplift Curve (AUUC).
-2. Qini Curve, Qini Score, and Normalized Qini Coefficient.
-3. Top-k fraction uplift and incremental conversions per 1,000 targeted customers.
-4. Precision in Estimation of Heterogeneous Effects (PEHE / Root MSE of CATE) for synthetic data.
-5. Bootstrap confidence intervals for policy and causal metrics.
-"""
-
 from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 import pandas as pd
@@ -28,24 +18,7 @@ def calculate_uplift_curve(
     uplift_scores: np.ndarray,
     n_bins: int = 100,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Compute cumulative uplift curve.
-
-    Parameters
-    ----------
-    y_true : np.ndarray
-        Observed binary outcomes (0 or 1).
-    treatment : np.ndarray
-        Treatment indicator (0 or 1).
-    uplift_scores : np.ndarray
-        Predicted CATE or priority score.
-    n_bins : int
-        Number of evaluation points along targeting fraction.
-
-    Returns
-    -------
-    Tuple[np.ndarray, np.ndarray, np.ndarray]
-        (fractions, cumulative_uplift, random_baseline)
-    """
+    """Compute cumulative uplift curve."""
     n = len(y_true)
     if n == 0:
         return np.zeros(1), np.zeros(1), np.zeros(1)

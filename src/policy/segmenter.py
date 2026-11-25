@@ -1,15 +1,3 @@
-"""Customer Segmentation into Actionable Causal Archetypes.
-
-Categorizes customer base into four canonical uplift quadrants:
-1. Persuadables: Low-to-moderate baseline, high positive treatment effect (Primary Target).
-2. Sure Things: High baseline conversion, negligible treatment effect (Wasted Budget).
-3. Lost Causes: Low baseline conversion, negligible treatment effect (Unresponsive).
-4. Sleeping Dogs / Do-Not-Target: Negative treatment effect (Harmful / Reactance).
-
-Caveat: These segment assignments are analytical model approximations based on
-estimated conditional expectations, not guaranteed individual causal truths.
-"""
-
 from dataclasses import asdict, dataclass
 import logging
 from typing import Any, Dict, List, Optional, Tuple, Union

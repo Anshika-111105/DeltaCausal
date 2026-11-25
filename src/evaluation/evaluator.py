@@ -1,9 +1,3 @@
-"""Comprehensive Model Evaluator and Benchmark Comparison Engine.
-
-Evaluates all candidate models on held-out validation and test sets, computes bootstrap
-confidence intervals, logs results, and generates publication-quality Plotly figures.
-"""
-
 from dataclasses import asdict, dataclass
 import json
 import logging

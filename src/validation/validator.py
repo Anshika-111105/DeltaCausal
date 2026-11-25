@@ -1,14 +1,3 @@
-"""Data Validation and Quality Assurance for Uplift Modeling Engine.
-
-Performs:
-1. Schema & column integrity checks (mandatory columns, data types, value sets).
-2. Missingness and duplicate record diagnostics.
-3. Severe outcome imbalance and sample size sufficiency tests.
-4. Target and post-treatment feature leakage detection.
-5. Predictor hygiene (ensuring treatment/outcomes are never included in feature matrix).
-6. Generation of structured machine-readable JSON reports and human-readable summaries.
-"""
-
 from dataclasses import asdict, dataclass
 import json
 import logging
