@@ -78,7 +78,7 @@ def load_experiment_data(exp_id: str):
 
 
 # --- SIDEBAR NAVIGATION ---
-st.sidebar.title("🎯 DeltaCausal")
+st.sidebar.title("DeltaCausal")
 st.sidebar.markdown("**Counterfactual Business Decision Platform**")
 
 exp_runs = load_available_experiments()
